@@ -1,18 +1,35 @@
+
 {
-    "builds":[
+    "builds": [
         {
-            "src":"project1/wsgi.py",
-            "use":"@vercel/python",
-            "config":{
-                "maxLambadaSize":"15mb",
-                "runtime":"python3.12"
+            "src": "project1/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambadaSize": "15mb",
+                "runtime": "python3.12"
             }
+        },
+        {
+            "src": "staticfiles/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "media/*",
+            "use": "@vercel/static"
         }
     ],
-    "routes":[
+    "routes": [
         {
-            "src":"/(.*)",
-            "dest":"project1/wsgi.py"
+            "src": "/static/(.*)",
+            "dest": "/staticfiles/$1"
+        },
+        {
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "project1/wsgi.py"
         }
     ]
 }
